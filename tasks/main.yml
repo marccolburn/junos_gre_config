@@ -1,0 +1,12 @@
+---
+- name: Configure JUNOS GRE Tunnels
+  junos_config:
+    lines: "{{ lookup('template', 'junos_gre_config.j2').split('\n') }}"
+    comment: Update gre tunnels
+  when: gre_remove == False
+
+- name: Remove JUNOS GRE Tunnels
+  junos_config:
+    lines: "{{ lookup('template', 'junos_gre_remove.j2').split('\n') }}"
+    comment: Remove gre tunnels
+  when: gre_remove == True

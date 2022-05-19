@@ -1,0 +1,8 @@
+{% if gre_tunnels is defined %}
+delete chassis fpc 0 pic 0 tunnel-services bandwidth {{ gre_settings.tun_bandwidth }}
+{% for tunnel in gre_tunnels %}
+delete interfaces {{ tunnel.interface }} unit {{ tunnel.unit }} tunnel source {{ tunnel.src }}
+delete interfaces {{ tunnel.interface }} unit {{ tunnel.unit }} tunnel destination {{ tunnel.dest }}
+delete interfaces {{ tunnel.interface }} unit {{ tunnel.unit }} family inet address {{ tunnel.address }}
+{% endfor %}
+{% endif %}
